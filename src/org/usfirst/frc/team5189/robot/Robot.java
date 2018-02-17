@@ -1,6 +1,5 @@
 package org.usfirst.frc.team5189.robot;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -8,7 +7,6 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.VictorSP;
 
 import org.usfirst.frc.team5189.robot.DriveBase;
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -61,14 +59,19 @@ public class Robot extends IterativeRobot {
 		m_driveBase.driveCartesian(m_joystick.getRawAxis(0), m_controller.getY()*-1, m_controller.getX()*-1);
 	}
 
-
 	/**
 	 * This function is called periodically during test mode.
 	 */
 	@Override
 	public void testPeriodic() {
+	}
+
+	@Override
+	public  void testInit() {
 		//System.out.println(m_joystick.getRawAxis(1));
 		//System.out.println(m_controller.getY());
-		System.out.println(m_controller.getX());
+		//System.out.println(m_controller.getX());
+		m_driveBase.driveCartesian(.5, 0, 0);
+		Timer.delay(5.0);
 	}
 }
