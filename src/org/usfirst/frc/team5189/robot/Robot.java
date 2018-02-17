@@ -17,12 +17,10 @@ import org.usfirst.frc.team5189.robot.DriveBase;
  * directory.
  */
 public class Robot extends IterativeRobot {
-	
 	private DriveBase m_driveBase
 		=new DriveBase(new VictorSP(0), new VictorSP(1), new VictorSP(2), new VictorSP(3));
 	private XboxController m_controller= new XboxController(0);
 	private Joystick m_joystick= new Joystick(0);
-	private Hand hand;
 	
 
 	/**
@@ -31,11 +29,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		
-		
-		
-		
-		
 	}
 
 
@@ -44,7 +37,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-	
 	}
 
 	/**
@@ -52,7 +44,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		
 	}
 
 	/**
@@ -60,23 +51,14 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopInit() {
-		
-	
 	}
-
-
-
 
 	/**
 	 * This function is called periodically during teleoperated mode.
 	 */
 	@Override
 	public void teleopPeriodic() {
-		
-		
 		m_driveBase.driveCartesian(m_joystick.getRawAxis(0), m_controller.getY()*-1, m_controller.getX()*-1);
-		
-		
 	}
 
 
@@ -85,5 +67,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+		System.out.println(m_joystick.getRawAxis(1));
 	}
 }
