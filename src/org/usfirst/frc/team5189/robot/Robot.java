@@ -67,6 +67,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void testPeriodic() {
-		System.out.println(m_joystick.getRawAxis(1));
+		//System.out.println(m_joystick.getRawAxis(1));
+		System.out.println(m_controller.getY());
 	}
 }
