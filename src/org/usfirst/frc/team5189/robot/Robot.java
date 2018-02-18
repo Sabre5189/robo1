@@ -46,22 +46,6 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public  void testInit() {
-		m_driveBase.driveCartesian(.5, 0, 0);
-		Timer.delay(2.0);
 
-		m_driveBase.driveCartesian(-.5, 0, 0);
-		Timer.delay(2.0);
-		
-		m_driveBase.driveCartesian(0, .5, 0);
-		Timer.delay(2.0);
-
-		m_driveBase.driveCartesian(0, -.5, 0);
-		Timer.delay(2.0);
-		
-		m_driveBase.driveCartesian(0, 0, .5);
-		Timer.delay(2.0);
-
-		m_driveBase.driveCartesian(0, 0, -.5);
-		Timer.delay(2.0);
 	}
 }
