@@ -46,6 +46,8 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public  void testInit() {
-
+		RobotDiagnostic diagnostics = new RobotDiagnostic();
+		
+		diagnostics.RunDiagnostic();
 	}
 }
