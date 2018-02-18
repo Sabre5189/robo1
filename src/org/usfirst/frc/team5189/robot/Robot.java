@@ -15,10 +15,9 @@ import org.usfirst.frc.team5189.robot.DriveBase;
  * directory.
  */
 public class Robot extends IterativeRobot {
-	private DriveBase m_driveBase
-		=new DriveBase(new VictorSP(0), new VictorSP(1), new VictorSP(2), new VictorSP(3));
-	private XboxController m_controller= new XboxController(0);
-	private Joystick m_joystick= new Joystick(0);
+	private DriveBase m_driveBase = new DriveBase(new VictorSP(0), new VictorSP(1), new VictorSP(2), new VictorSP(3));
+	private XboxController m_controller = new XboxController(0);
+	private Joystick m_joystick = new Joystick(0);
 	
 	@Override
 	public void robotInit() {
