@@ -3,7 +3,6 @@ package org.usfirst.frc.team5189.robot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.VictorSP;
 
 import org.usfirst.frc.team5189.robot.DriveBase;
