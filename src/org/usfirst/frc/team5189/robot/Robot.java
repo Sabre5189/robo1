@@ -1,5 +1,8 @@
 package org.usfirst.frc.team5189.robot;
 
+import java.time.LocalDateTime;
+
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -17,16 +20,16 @@ public class Robot extends IterativeRobot {
 	private DriveBase m_driveBase = new DriveBase(new VictorSP(0), new VictorSP(1), new VictorSP(2), new VictorSP(3));
 	private XboxController m_controller = new XboxController(0);
 	private Joystick m_joystick = new Joystick(0);
-	
+
+	private LocalDateTime stopTime;
+
 	@Override
 	public void robotInit() {
 	}
 
 	@Override
 	public  void autonomousInit() {
-		//System.out.println(m_joystick.getRawAxis(1));
-		//System.out.println(m_controller.getY());
-		//System.out.println(m_controller.getX());
+		stopTime = LocalDateTime.now().plusSeconds(5);
 	}
 
 	@Override
@@ -35,14 +38,13 @@ public class Robot extends IterativeRobot {
 		 * The robot does not drive in autonomousInit
 		 *Create a way to drive the robot (periodic?)
 		*/
-		
-		int x = 0;
-		while(x < 5) {
-			m_driveBase.driveCartesian(1, 0, 0);
-			m_driveBase.driveCartesian(0, 1, 0);
-			Timer.delay(.001);
-			x++;
+
+		if (LocalDateTime.now().isAfter(stopTime)) {
+			m_driveBase.driveCartesian(0, 0, 0);
+			return;
 		}
+
+		m_driveBase.driveCartesian(0, 1, 0);
 	}
 
 	@Override
