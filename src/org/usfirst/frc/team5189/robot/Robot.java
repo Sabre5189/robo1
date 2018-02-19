@@ -34,22 +34,29 @@ public class Robot extends IterativeRobot {
 	 * This function is run once each time the robot enters autonomous mode.
 	 */
 	@Override
-	public void autonomousInit() {
-		//10' to auto base line + 2" of baseline thickness
+	public  void autonomousInit() {
 		//System.out.println(m_joystick.getRawAxis(1));
 		//System.out.println(m_controller.getY());
 		//System.out.println(m_controller.getX());
-		
-		//m_driveBase.driveCartesian(.5, 0, 0);
-		//Timer.delay(5.0);
 	}
-	
 
 	/**
 	 * This function is called periodically during autonomous.
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		/**
+		 * The robot does not drive in autonomousInit
+		 *Create a way to drive the robot (periodic?)
+		*/
+		
+		int x = 0;
+		while(x < 5) {
+			m_driveBase.driveCartesian(1, 0, 0);
+			m_driveBase.driveCartesian(0, 1, 0);
+			Timer.delay(.001);
+			x++;
+		}
 	}
 
 	/**
@@ -79,8 +86,9 @@ public class Robot extends IterativeRobot {
 		//System.out.println(m_joystick.getRawAxis(1));
 		//System.out.println(m_controller.getY());
 		//System.out.println(m_controller.getX());
-		m_driveBase.driveCartesian(.5, 0, 0);
-		Timer.delay(5.0);
+		m_driveBase.driveCartesian(1, 0, 0);
+		m_driveBase.driveCartesian(0, 1, 0);
+		Timer.delay(4.0);
 	}
 }
 
