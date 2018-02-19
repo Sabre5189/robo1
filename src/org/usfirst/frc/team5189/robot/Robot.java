@@ -32,6 +32,8 @@ public class Robot extends IterativeRobot {
 		stopTime = LocalDateTime.now().plusSeconds(5);
 	}
 
+	double motorSpeed =0.0;
+	
 	@Override
 	public void autonomousPeriodic() {
 		/**
@@ -43,8 +45,12 @@ public class Robot extends IterativeRobot {
 			m_driveBase.driveCartesian(0, 0, 0);
 			return;
 		}
-
-		m_driveBase.driveCartesian(0, 1, 0);
+		
+		if (motorSpeed <= 1.0) {
+			motorSpeed = motorSpeed + .025;
+		}
+		
+		m_driveBase.driveCartesian(0, motorSpeed, 0);
 	}
 
 	@Override
@@ -62,9 +68,27 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public  void testInit() {
-		RobotDiagnostic diagnostics = new RobotDiagnostic();
+//		RobotDiagnostic diagnostics = new RobotDiagnostic();
+//		
+//		diagnostics.RunDiagnostic();
+		m_driveBase.driveCartesian(.5, 0, 0);
+		Timer.delay(2.0);
+
+		m_driveBase.driveCartesian(-.5, 0, 0);
+		Timer.delay(2.0);
 		
-		diagnostics.RunDiagnostic();
+		m_driveBase.driveCartesian(0, .5, 0);
+		Timer.delay(2.0);
+
+		m_driveBase.driveCartesian(0, -.5, 0);
+		Timer.delay(2.0);
+		
+		m_driveBase.driveCartesian(0, 0, .5);
+		Timer.delay(2.0);
+
+		m_driveBase.driveCartesian(0, 0, -.5);
+		Timer.delay(2.0);
+
 	}
 }
 
