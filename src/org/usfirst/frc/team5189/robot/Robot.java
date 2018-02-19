@@ -23,11 +23,26 @@ public class Robot extends IterativeRobot {
 	}
 
 	@Override
-	public void autonomousInit() {
+	public  void autonomousInit() {
+		//System.out.println(m_joystick.getRawAxis(1));
+		//System.out.println(m_controller.getY());
+		//System.out.println(m_controller.getX());
 	}
 
 	@Override
 	public void autonomousPeriodic() {
+		/**
+		 * The robot does not drive in autonomousInit
+		 *Create a way to drive the robot (periodic?)
+		*/
+		
+		int x = 0;
+		while(x < 5) {
+			m_driveBase.driveCartesian(1, 0, 0);
+			m_driveBase.driveCartesian(0, 1, 0);
+			Timer.delay(.001);
+			x++;
+		}
 	}
 
 	@Override
@@ -50,3 +65,36 @@ public class Robot extends IterativeRobot {
 		diagnostics.RunDiagnostic();
 	}
 }
+
+
+
+
+
+
+
+	/** 
+	 * To Do:
+	 * 
+	 * Two lift motor; 1 runs in reverse of the other
+	 * 3 pneumatic objects, one is Tilt 45, tilt 90, grabber 
+	 * when all 3 pneumatics are off naturally the tilt is all the way up 
+	 * if you activate 45 tilt it will go to 45 
+	 * if you activate 90 it will go all the way down
+	 * grabber is either release or grab
+	 * camera coding figure out
+	 */
+	 
+	 /** 
+	  * XBox Controller Mapping:
+	  * 
+	  * left joystick: strafe
+	  * right joystick: forward/back
+	  * left/right trigger: z rotation
+	  * dpad up: lift up (momentary)
+	  * dpad down: lift down (momentary)
+	  * y: tilt 0
+	  * b: tilt 45
+	  * a: tilt 90
+	  * x: grab/release (continuous)
+	  * left/right bumper: camera pan (momentary)
+	  */
