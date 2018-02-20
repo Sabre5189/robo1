@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.VictorSP;
 
+import edu.wpi.first.wpilibj.Spark;
+
 import org.usfirst.frc.team5189.robot.DriveBase;
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,6 +24,13 @@ public class Robot extends IterativeRobot {
 	private Joystick m_joystick = new Joystick(0);
 
 	private LocalDateTime stopTime;
+	
+	private int LeftLiftChannel  = 4;
+	private int RightLiftChannel  = 5;
+	
+	
+	private Spark leftLift = new Spark(LeftLiftChannel);
+	private Spark rightLift= new Spark(RightLiftChannel);
 
 	@Override
 	public void robotInit() {
@@ -32,7 +41,7 @@ public class Robot extends IterativeRobot {
 		stopTime = LocalDateTime.now().plusSeconds(5);
 	}
 
-	double motorSpeed =0.0;
+	double motorSpeed = 0.0;
 	
 	@Override
 	public void autonomousPeriodic() {
@@ -59,7 +68,11 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopPeriodic() {
+		
+		// moving
 		m_driveBase.driveCartesian(m_joystick.getRawAxis(0), m_controller.getY()*-1, m_controller.getX()*-1);
+		
+		// lift
 	}
 
 	@Override
@@ -71,6 +84,20 @@ public class Robot extends IterativeRobot {
 //		RobotDiagnostic diagnostics = new RobotDiagnostic();
 //		
 //		diagnostics.RunDiagnostic();
+
+		//testMovement();
+		
+		leftLift.set(0.5);
+		rightLift.set(0.5);
+		Timer.delay(2.0);
+		
+		leftLift.set(-0.5);
+		rightLift.set(-0.5);
+		Timer.delay(2.0);
+	}
+	
+	private void testMovement()
+	{
 		m_driveBase.driveCartesian(.5, 0, 0);
 		Timer.delay(2.0);
 
@@ -88,7 +115,6 @@ public class Robot extends IterativeRobot {
 
 		m_driveBase.driveCartesian(0, 0, -.5);
 		Timer.delay(2.0);
-
 	}
 }
 
