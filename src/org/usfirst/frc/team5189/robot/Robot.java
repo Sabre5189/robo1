@@ -140,13 +140,14 @@ public class Robot extends IterativeRobot {
 	  * XBox Controller Mapping:
 	  * 
 	  * left joystick: strafe
-	  * right joystick: forward/back
-	  * left/right trigger: z rotation
-	  * dpad up: lift up (momentary)
-	  * dpad down: lift down (momentary)
-	  * y: tilt 0
-	  * b: tilt 45
-	  * a: tilt 90
+	  * right joystick: forward/back/rotate
+	  * y:
+	  * b: push/retract
+	  * a: tilt up/down position
 	  * x: grab/release (continuous)
 	  * left/right bumper: camera pan (momentary)
+	  *
+	  *
+	  * dpad up: lift up (momentary)
+	  * dpad down: lift down (momentary)
 	  */
