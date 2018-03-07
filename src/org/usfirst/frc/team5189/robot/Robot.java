@@ -92,6 +92,18 @@ public class Robot extends IterativeRobot {
 			pneumaticsX.set(true);
 		}
 
+		boolean bIsPressed = m_controller.getBackButtonPressed();
+
+		if(bIsPressed) {
+			pneumaticsB.set(true);
+		}
+
+		boolean aIsPressed = m_controller.getAButtonPressed();
+
+		if(aIsPressed) {
+			pneumaticsA.set(true);
+		}
+
 		// commenting debounce for now
 //		if(xIsPressed) {
 //			if (debounce) {
