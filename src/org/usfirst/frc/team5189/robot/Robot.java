@@ -3,7 +3,7 @@ package org.usfirst.frc.team5189.robot;
 import java.time.LocalDateTime;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.Compressor;
+//import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -26,7 +26,7 @@ public class Robot extends IterativeRobot {
 	private XboxController m_controller = new XboxController(0);
 	private Joystick m_joystick = new Joystick(0);
 
-	private Compressor c = new Compressor(0);
+	//private Compressor c = new Compressor(0);
 
 	private LocalDateTime stopTime;
 
@@ -34,13 +34,13 @@ public class Robot extends IterativeRobot {
 	private int RightLiftChannel  = 5;
 	private double motorSpeed = 0.0;
 
-	private int PneumaticsChannelA = 7;
-	private int PneumaticsChannelB = 8;
-	private int PneumaticsChannelX = 9;
-
-	private Solenoid pneumaticsA = new Solenoid(PneumaticsChannelA);
-	private Solenoid pneumaticsB = new Solenoid(PneumaticsChannelB);
-	private Solenoid pneumaticsX = new Solenoid(PneumaticsChannelX);
+//	private int PneumaticsChannelA = 7;
+//	private int PneumaticsChannelB = 8;
+//	private int PneumaticsChannelX = 9;
+//
+//	private Solenoid pneumaticsA = new Solenoid(PneumaticsChannelA);
+//	private Solenoid pneumaticsB = new Solenoid(PneumaticsChannelB);
+//	private Solenoid pneumaticsX = new Solenoid(PneumaticsChannelX);
 
 	private Spark leftLift = new Spark(LeftLiftChannel);
 	private Spark rightLift= new Spark(RightLiftChannel);
@@ -75,8 +75,8 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
-		c.setClosedLoopControl(true);
-		c.setClosedLoopControl(false);
+//		c.setClosedLoopControl(true);
+//		c.setClosedLoopControl(false);
 	}
 
 	@Override
@@ -89,19 +89,19 @@ public class Robot extends IterativeRobot {
 
 		if(xIsPressed) {
 			// do something
-			pneumaticsX.set(true);
+			//pneumaticsX.set(true);
 		}
 
 		boolean bIsPressed = m_controller.getBackButtonPressed();
 
 		if(bIsPressed) {
-			pneumaticsB.set(true);
+//			pneumaticsB.set(true);
 		}
 
 		boolean aIsPressed = m_controller.getAButtonPressed();
 
 		if(aIsPressed) {
-			pneumaticsA.set(true);
+//			pneumaticsA.set(true);
 		}
 
 		// commenting debounce for now
