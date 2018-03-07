@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.VictorSP;
+//import com.ctre.phoenix.motorcontrol.can.*;
+import edu.wpi.first.wpilibj.Solenoid;
 
 import edu.wpi.first.wpilibj.Spark;
 
@@ -24,11 +26,19 @@ public class Robot extends IterativeRobot {
 	private Joystick m_joystick = new Joystick(0);
 
 	private LocalDateTime stopTime;
-	
+
 	private int LeftLiftChannel  = 4;
 	private int RightLiftChannel  = 5;
-	
-	
+	private double motorSpeed = 0.0;
+
+	private int PneumaticsChannelA = 7;
+	private int PneumaticsChannelB = 8;
+	private int PneumaticsChannelX = 9;
+
+	private Solenoid pneumaticsA = new Solenoid(PneumaticsChannelA);
+	private Solenoid pneumaticsB = new Solenoid(PneumaticsChannelB);
+	private Solenoid pneumaticsX = new Solenoid(PneumaticsChannelX);
+
 	private Spark leftLift = new Spark(LeftLiftChannel);
 	private Spark rightLift= new Spark(RightLiftChannel);
 
@@ -41,8 +51,6 @@ public class Robot extends IterativeRobot {
 		stopTime = LocalDateTime.now().plusSeconds(5);
 	}
 
-	double motorSpeed = 0.0;
-	
 	@Override
 	public void autonomousPeriodic() {
 		/**
@@ -68,11 +76,28 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopPeriodic() {
-		
+
 		// moving
 		m_driveBase.driveCartesian(m_joystick.getRawAxis(0), m_controller.getY()*-1, m_controller.getX()*-1);
-		
-		// lift
+
+		// grab
+		boolean xIsPressed = m_controller.getXButtonPressed();
+
+		if(xIsPressed) {
+			// do something
+			pneumaticsX.set(true);
+		}
+
+		// commenting debounce for now
+//		if(xIsPressed) {
+//			if (debounce) {
+//				// do something
+//			}
+//			else {
+//				debounce = true;
+//				Timer.delay(.01);
+//			}
+//		}			
 	}
 
 	@Override
@@ -85,7 +110,7 @@ public class Robot extends IterativeRobot {
 //		
 //		diagnostics.RunDiagnostic();
 
-		//testMovement();
+		testMovement();
 		
 		leftLift.set(0.5);
 		rightLift.set(0.5);
