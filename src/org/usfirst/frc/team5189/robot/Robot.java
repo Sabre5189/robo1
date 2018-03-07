@@ -3,6 +3,7 @@ package org.usfirst.frc.team5189.robot;
 import java.time.LocalDateTime;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -24,6 +25,8 @@ public class Robot extends IterativeRobot {
 	private DriveBase m_driveBase = new DriveBase(new VictorSP(0), new VictorSP(1), new VictorSP(2), new VictorSP(3));
 	private XboxController m_controller = new XboxController(0);
 	private Joystick m_joystick = new Joystick(0);
+
+	private Compressor c = new Compressor(0);
 
 	private LocalDateTime stopTime;
 
@@ -72,11 +75,12 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
+		c.setClosedLoopControl(true);
+		c.setClosedLoopControl(false);
 	}
 
 	@Override
 	public void teleopPeriodic() {
-
 		// moving
 		m_driveBase.driveCartesian(m_joystick.getRawAxis(0), m_controller.getY()*-1, m_controller.getX()*-1);
 
