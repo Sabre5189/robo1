@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.VictorSP;
-//import com.ctre.phoenix.motorcontrol.can.*;
 import edu.wpi.first.wpilibj.Solenoid;
 
 import edu.wpi.first.wpilibj.Spark;
@@ -26,24 +25,25 @@ public class Robot extends IterativeRobot {
 	private XboxController m_controller = new XboxController(0);
 	private Joystick m_joystick = new Joystick(0);
 
-	//private Compressor c = new Compressor(0);
+//	private Compressor c = new Compressor(0);
+
 
 	private LocalDateTime stopTime;
 
-	private int LeftLiftChannel  = 4;
-	private int RightLiftChannel  = 5;
+
 	private double motorSpeed = 0.0;
 
 //	private int PneumaticsChannelA = 7;
 //	private int PneumaticsChannelB = 8;
 //	private int PneumaticsChannelX = 9;
 //
+	private int PneumaticsChannelA = 0;
+	private int PneumaticsChannelB = 1;
+	private int PneumaticsChannelX = 2;
+
 //	private Solenoid pneumaticsA = new Solenoid(PneumaticsChannelA);
 //	private Solenoid pneumaticsB = new Solenoid(PneumaticsChannelB);
 //	private Solenoid pneumaticsX = new Solenoid(PneumaticsChannelX);
-
-	private Spark leftLift = new Spark(LeftLiftChannel);
-	private Spark rightLift= new Spark(RightLiftChannel);
 
 	@Override
 	public void robotInit() {
@@ -120,21 +120,109 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() {
 	}
 
+	private Solenoid foo0 = new Solenoid(0);
+	private Solenoid foo1 = new Solenoid(1);
+	private Solenoid foo2 = new Solenoid(2);
+	private Solenoid foo3 = new Solenoid(3);
+	private Solenoid foo4 = new Solenoid(4);
+	private Solenoid foo5 = new Solenoid(5);
+	private Solenoid foo6 = new Solenoid(6);
+	private Solenoid foo7 = new Solenoid(7);
+
+
 	@Override
 	public  void testInit() {
+		System.out.println("starting testInit");
 //		RobotDiagnostic diagnostics = new RobotDiagnostic();
 //		
 //		diagnostics.RunDiagnostic();
 
-		testMovement();
-		
-		leftLift.set(0.5);
-		rightLift.set(0.5);
+
+
+		// commenting this while we're testing the pneumatics
+//		testMovement();
+
+		System.out.println("channel 0 true");
+		foo0.set(true);
+		Timer.delay(2.0);
+
+		System.out.println("channel 0 false");
+		foo0.set(false);
+		Timer.delay(2.0);
+
+		System.out.println("channel 1 true");
+		foo1.set(true);
+		Timer.delay(2.0);
+
+		System.out.println("channel 1 false");
+		foo1.set(false);
+		Timer.delay(2.0);
+
+		System.out.println("channel 2 true");
+		foo2.set(true);
+		Timer.delay(2.0);
+
+		System.out.println("channel 2 false");
+		foo2.set(false);
+		Timer.delay(2.0);
+
+		System.out.println("channel 3 true");
+		foo3.set(true);
+		Timer.delay(2.0);
+
+		System.out.println("channel 3 false");
+		foo3.set(false);
+		Timer.delay(2.0);
+
+		System.out.println("channel 4 true");
+		foo4.set(true);
+		Timer.delay(2.0);
+
+		System.out.println("channel 4 false");
+		foo4.set(false);
+		Timer.delay(2.0);
+
+		System.out.println("channel 5 true");
+		foo5.set(true);
+		Timer.delay(2.0);
+
+		System.out.println("channel 5 false");
+		foo5.set(false);
 		Timer.delay(2.0);
 		
-		leftLift.set(-0.5);
-		rightLift.set(-0.5);
+		System.out.println("channel 6 true");
+		foo6.set(true);
 		Timer.delay(2.0);
+
+		System.out.println("channel 6 false");
+		foo6.set(false);
+		Timer.delay(2.0);
+
+		System.out.println("channel 7 true");
+		foo7.set(true);
+		Timer.delay(2.0);
+
+		System.out.println("channel 7 false");
+		foo7.set(false);
+		Timer.delay(2.0);
+
+
+		System.out.println("finished testInit");
+		//------------------------------------------
+
+
+
+//		pneumaticsA.set(true);
+//		Timer.delay(2.0);
+//		pneumaticsA.set(false);
+//
+//		pneumaticsB.set(true);
+//		Timer.delay(2.0);
+//		pneumaticsB.set(false);
+//
+//		pneumaticsX.set(true);
+//		Timer.delay(2.0);
+//		pneumaticsX.set(false);
 	}
 	
 	private void testMovement()
