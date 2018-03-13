@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.first.wpilibj.Spark;
 
@@ -141,70 +142,79 @@ public class Robot extends IterativeRobot {
 
 		// commenting this while we're testing the pneumatics
 //		testMovement();
+		
+		// how much time does the pneumatic pump need to get up to pressure?
+		Timer.delay(4.0);
 
-		System.out.println("channel 0 true");
-		foo0.set(true);
-		Timer.delay(2.0);
+		// closes left, then right grabber
+//		System.out.println("channel 0 true");
+//		foo0.set(true);
+//		Timer.delay(2.0);
 
-		System.out.println("channel 0 false");
-		foo0.set(false);
-		Timer.delay(2.0);
-
-		System.out.println("channel 1 true");
-		foo1.set(true);
-		Timer.delay(2.0);
-
-		System.out.println("channel 1 false");
-		foo1.set(false);
-		Timer.delay(2.0);
-
-		System.out.println("channel 2 true");
-		foo2.set(true);
-		Timer.delay(2.0);
-
-		System.out.println("channel 2 false");
-		foo2.set(false);
-		Timer.delay(2.0);
-
+		// so far nothing I can see
+//		System.out.println("channel 0 false");
+//		foo0.set(false);
+//		Timer.delay(2.0);
+//
+		// pushes pusher out
+//		System.out.println("channel 1 true");
+//		foo1.set(true);
+//		Timer.delay(2.0);
+//
+		// so far nothing I can see
+//		System.out.println("channel 1 false");
+//		foo1.set(false);
+//		Timer.delay(2.0);
+//
+		// lifts
+//		System.out.println("channel 2 true");
+//		foo2.set(true);
+//		Timer.delay(2.0);
+//
+		// so far nothing I can see
+//		System.out.println("channel 2 false");
+//		foo2.set(false);
+//		Timer.delay(2.0);
+//
 		System.out.println("channel 3 true");
 		foo3.set(true);
 		Timer.delay(2.0);
-
-		System.out.println("channel 3 false");
-		foo3.set(false);
-		Timer.delay(2.0);
-
-		System.out.println("channel 4 true");
-		foo4.set(true);
-		Timer.delay(2.0);
-
-		System.out.println("channel 4 false");
-		foo4.set(false);
-		Timer.delay(2.0);
-
-		System.out.println("channel 5 true");
-		foo5.set(true);
-		Timer.delay(2.0);
-
-		System.out.println("channel 5 false");
-		foo5.set(false);
-		Timer.delay(2.0);
-		
-		System.out.println("channel 6 true");
-		foo6.set(true);
-		Timer.delay(2.0);
-
-		System.out.println("channel 6 false");
-		foo6.set(false);
-		Timer.delay(2.0);
-
-		System.out.println("channel 7 true");
-		foo7.set(true);
-		Timer.delay(2.0);
-
-		System.out.println("channel 7 false");
-		foo7.set(false);
-		Timer.delay(2.0);
+//
+//		System.out.println("channel 3 false");
+//		foo3.set(false);
+//		Timer.delay(2.0);
+//
+//		System.out.println("channel 4 true");
+//		foo4.set(true);
+//		Timer.delay(2.0);
+//
+//		System.out.println("channel 4 false");
+//		foo4.set(false);
+//		Timer.delay(2.0);
+//
+//		System.out.println("channel 5 true");
+//		foo5.set(true);
+//		Timer.delay(2.0);
+//
+//		System.out.println("channel 5 false");
+//		foo5.set(false);
+//		Timer.delay(2.0);
+//		
+//		System.out.println("channel 6 true");
+//		foo6.set(true);
+//		Timer.delay(2.0);
+//
+//		System.out.println("channel 6 false");
+//		foo6.set(false);
+//		Timer.delay(2.0);
+//
+//		System.out.println("channel 7 true");
+//		foo7.set(true);
+//		Timer.delay(2.0);
+//
+//		System.out.println("channel 7 false");
+//		foo7.set(false);
+//		Timer.delay(2.0);
 
 
 		System.out.println("finished testInit");
