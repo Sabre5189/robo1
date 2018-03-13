@@ -122,7 +122,9 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() {
 	}
 
-	
+	DoubleSolenoid dsPusher= new DoubleSolenoid(1,6);
+	DoubleSolenoid dsLifter= new DoubleSolenoid(2,3);
+	DoubleSolenoid dsGrabber= new DoubleSolenoid(5,4);
 
 	@Override
 	public  void testInit() {
@@ -140,53 +142,26 @@ public class Robot extends IterativeRobot {
 
 		// commenting this while we're testing the pneumatics
 //		testMovement();
+		
+		
+		
 
 		// how much time does the pneumatic pump need to get up to pressure?
 		System.out.println("pneumatic delay start");
 		Timer.delay(4.0);
 		System.out.println("pneumatic delay finished");
 		
-		DoubleSolenoid dsPusher= new DoubleSolenoid(1,6);
+		grab();
 		
-		dsPusher.set(DoubleSolenoid.Value.kOff);
-		Timer.delay(1.0);
+		liftUp();
 		
-		System.out.println("pusher: forward");
-		dsPusher.set(DoubleSolenoid.Value.kForward);
-		Timer.delay(1.0);
-
-		System.out.println("pusher: reverse");
-		dsPusher.set(DoubleSolenoid.Value.kReverse);
-		Timer.delay(1.0);
+		push();
+		retract();
+				
+		setDown();
 
 		
-		DoubleSolenoid dsLifter= new DoubleSolenoid(2,3);
-		
-		dsLifter.set(DoubleSolenoid.Value.kOff);
-		Timer.delay(1.0);
-		
-		System.out.println("lifter: up");
-		dsLifter.set(DoubleSolenoid.Value.kForward);
-		Timer.delay(10.0);
-
-		System.out.println("lifter: down");
-		dsLifter.set(DoubleSolenoid.Value.kReverse);
-		
-		
-		DoubleSolenoid dsGrabber= new DoubleSolenoid(5,4);
-		
-		dsGrabber.set(DoubleSolenoid.Value.kOff);
-		Timer.delay(1.0);
-		
-		System.out.println("lifter: up");
-		dsGrabber.set(DoubleSolenoid.Value.kForward);
-		Timer.delay(1.0);
-
-		System.out.println("lifter: down");
-		dsGrabber.set(DoubleSolenoid.Value.kReverse);
-		
-		
-		
+		release();
 		
 		
 		System.out.println("finished testInit");
@@ -207,7 +182,37 @@ public class Robot extends IterativeRobot {
 //		pneumaticsX.set(false);
 	}
 	
-	private void testMovement()
+	private void push() {
+		dsPusher.set(DoubleSolenoid.Value.kForward);
+		Timer.delay(1.0);
+	}
+	
+	private void retract() {
+		dsPusher.set(DoubleSolenoid.Value.kReverse);
+		Timer.delay(1.0);
+	}
+	
+	private void liftUp() {
+		dsLifter.set(DoubleSolenoid.Value.kForward);
+		Timer.delay(8.0);
+	}
+	
+	private void setDown() {
+		dsLifter.set(DoubleSolenoid.Value.kReverse);
+		Timer.delay(4.0);
+	}
+	
+	private void grab() {
+		dsGrabber.set(DoubleSolenoid.Value.kForward);
+		Timer.delay(0.5);
+	}
+	
+	private void release() {
+		dsGrabber.set(DoubleSolenoid.Value.kReverse);
+		Timer.delay(0.5);
+	}
+	
+ 	private void testMovement()
 	{
 		m_driveBase.driveCartesian(.5, 0, 0);
 		Timer.delay(2.0);
