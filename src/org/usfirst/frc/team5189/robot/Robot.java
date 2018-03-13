@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.first.wpilibj.Spark;
@@ -121,19 +122,16 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() {
 	}
 
-	private Solenoid foo0 = new Solenoid(0);
-	private Solenoid foo1 = new Solenoid(1);
-	private Solenoid foo2 = new Solenoid(2);
-	private Solenoid foo3 = new Solenoid(3);
-	private Solenoid foo4 = new Solenoid(4);
-	private Solenoid foo5 = new Solenoid(5);
-	private Solenoid foo6 = new Solenoid(6);
-	private Solenoid foo7 = new Solenoid(7);
-
+	
 
 	@Override
 	public  void testInit() {
 		System.out.println("starting testInit");
+		
+		
+		
+		
+		
 //		RobotDiagnostic diagnostics = new RobotDiagnostic();
 //		
 //		diagnostics.RunDiagnostic();
@@ -142,81 +140,55 @@ public class Robot extends IterativeRobot {
 
 		// commenting this while we're testing the pneumatics
 //		testMovement();
-		
+
 		// how much time does the pneumatic pump need to get up to pressure?
+		System.out.println("pneumatic delay start");
 		Timer.delay(4.0);
+		System.out.println("pneumatic delay finished");
+		
+		DoubleSolenoid dsPusher= new DoubleSolenoid(1,6);
+		
+		dsPusher.set(DoubleSolenoid.Value.kOff);
+		Timer.delay(1.0);
+		
+		System.out.println("pusher: forward");
+		dsPusher.set(DoubleSolenoid.Value.kForward);
+		Timer.delay(1.0);
 
-		// closes left, then right grabber
-//		System.out.println("channel 0 true");
-//		foo0.set(true);
-//		Timer.delay(2.0);
+		System.out.println("pusher: reverse");
+		dsPusher.set(DoubleSolenoid.Value.kReverse);
+		Timer.delay(1.0);
 
-		// so far nothing I can see
-//		System.out.println("channel 0 false");
-//		foo0.set(false);
-//		Timer.delay(2.0);
-//
-		// pushes pusher out
-//		System.out.println("channel 1 true");
-//		foo1.set(true);
-//		Timer.delay(2.0);
-//
-		// so far nothing I can see
-//		System.out.println("channel 1 false");
-//		foo1.set(false);
-//		Timer.delay(2.0);
-//
-		// lifts
-//		System.out.println("channel 2 true");
-//		foo2.set(true);
-//		Timer.delay(2.0);
-//
-		// so far nothing I can see
-//		System.out.println("channel 2 false");
-//		foo2.set(false);
-//		Timer.delay(2.0);
-//
-		System.out.println("channel 3 true");
-		foo3.set(true);
-		Timer.delay(2.0);
-//
-//		System.out.println("channel 3 false");
-//		foo3.set(false);
-//		Timer.delay(2.0);
-//
-//		System.out.println("channel 4 true");
-//		foo4.set(true);
-//		Timer.delay(2.0);
-//
-//		System.out.println("channel 4 false");
-//		foo4.set(false);
-//		Timer.delay(2.0);
-//
-//		System.out.println("channel 5 true");
-//		foo5.set(true);
-//		Timer.delay(2.0);
-//
-//		System.out.println("channel 5 false");
-//		foo5.set(false);
-//		Timer.delay(2.0);
-//		
-//		System.out.println("channel 6 true");
-//		foo6.set(true);
-//		Timer.delay(2.0);
-//
-//		System.out.println("channel 6 false");
-//		foo6.set(false);
-//		Timer.delay(2.0);
-//
-//		System.out.println("channel 7 true");
-//		foo7.set(true);
-//		Timer.delay(2.0);
-//
-//		System.out.println("channel 7 false");
-//		foo7.set(false);
-//		Timer.delay(2.0);
+		
+		DoubleSolenoid dsLifter= new DoubleSolenoid(2,3);
+		
+		dsLifter.set(DoubleSolenoid.Value.kOff);
+		Timer.delay(1.0);
+		
+		System.out.println("lifter: up");
+		dsLifter.set(DoubleSolenoid.Value.kForward);
+		Timer.delay(10.0);
 
+		System.out.println("lifter: down");
+		dsLifter.set(DoubleSolenoid.Value.kReverse);
+		
+		
+		DoubleSolenoid dsGrabber= new DoubleSolenoid(5,4);
+		
+		dsGrabber.set(DoubleSolenoid.Value.kOff);
+		Timer.delay(1.0);
+		
+		System.out.println("lifter: up");
+		dsGrabber.set(DoubleSolenoid.Value.kForward);
+		Timer.delay(1.0);
 
+		System.out.println("lifter: down");
+		dsGrabber.set(DoubleSolenoid.Value.kReverse);
+		
+		
+		
+		
+		
 		System.out.println("finished testInit");
 		//------------------------------------------
 
@@ -254,6 +226,123 @@ public class Robot extends IterativeRobot {
 
 		m_driveBase.driveCartesian(0, 0, -.5);
 		Timer.delay(2.0);
+	}
+	
+	private void singleSolenoidTest() {
+		
+		Solenoid foo0 = new Solenoid(0);
+		Solenoid foo1 = new Solenoid(1);
+		Solenoid foo2 = new Solenoid(2);
+		Solenoid foo3 = new Solenoid(3);
+		Solenoid foo4 = new Solenoid(4);
+		Solenoid foo5 = new Solenoid(5);
+		Solenoid foo6 = new Solenoid(6);
+		Solenoid foo7 = new Solenoid(7);
+		
+		
+		
+		foo0.set(false);
+		foo1.set(false);
+		foo2.set(false);
+		foo3.set(false);
+		foo4.set(false);
+		foo5.set(false);
+		foo6.set(false);
+		foo7.set(false);
+		
+		
+		
+		
+		
+		// closes left, then right grabber
+		System.out.println("channel 0 true");
+		foo0.set(true);
+		Timer.delay(2.0);
+
+		
+		// opens right, then left
+		System.out.println("channel 4 true");
+		foo4.set(true);
+		Timer.delay(2.0);
+		
+		
+		// pushes pusher out
+//		System.out.println("channel 1 true");
+//		foo1.set(true);
+//		Timer.delay(2.0);
+//
+		// pulls pusher in
+//		System.out.println("channel 6 true");
+//		foo6.set(true);
+//		Timer.delay(2.0);
+		
+		// lifts
+//		System.out.println("channel 2 true");
+//		foo2.set(true);
+//		Timer.delay(4.0);
+		
+		
+		
+		
+		
+		
+		
+		// so far nothing I can see
+//		System.out.println("channel 0 false");
+//		foo0.set(false);
+//		Timer.delay(2.0);
+//
+
+		// so far nothing I can see
+//		System.out.println("channel 1 false");
+//		foo1.set(false);
+//		Timer.delay(2.0);
+//
+
+		// so far nothing I can see
+//		System.out.println("channel 2 false");
+//		foo2.set(false);
+//		Timer.delay(2.0);
+//
+		// so far nothing I can see
+//		System.out.println("channel 3 true");
+//		foo3.set(true);
+//		Timer.delay(2.0);
+//
+		// so far nothing I can see
+//		System.out.println("channel 3 false");
+//		foo3.set(false);
+//		Timer.delay(2.0);
+
+//
+		// so far nothing I can see
+//		System.out.println("channel 4 false");
+//		foo4.set(false);
+//		Timer.delay(2.0);
+//
+		// closes right, then left grabber
+//		System.out.println("channel 5 true");
+//		foo5.set(true);
+//		Timer.delay(2.0);
+//
+		// closes right, then left grabber
+//		System.out.println("channel 5 false");
+//		foo5.set(false);
+//		Timer.delay(2.0);
+//		
+//
+		// so far nothing I can see
+//		System.out.println("channel 6 false");
+//		foo6.set(false);
+//		Timer.delay(2.0);
+
+//		System.out.println("channel 7 true");
+//		foo7.set(true);
+//		Timer.delay(2.0);
+//
+//		System.out.println("channel 7 false");
+//		foo7.set(false);
+//		Timer.delay(2.0);
 	}
 }
 
