@@ -87,14 +87,27 @@ public class Robot extends IterativeRobot {
 		boolean aIsPressed = m_controller.getAButtonPressed();
 		boolean bIsPressed = m_controller.getBButtonPressed();
 		boolean xIsPressed = m_controller.getXButtonPressed();
+		boolean yIsPressed = m_controller.getYButtonPressed();
 
+//		a: tilt up/down position
 		if(aIsPressed) {
+			liftUp();
 		}
 
+//		b: push/retract
 		if(bIsPressed) {
+			push();
 		}
 
+//		x: grab/release (continuous)
 		if(xIsPressed) {
+			grab();
+		}
+
+		if(yIsPressed) {
+			setDown();
+			retract();
+			release();
 		}
 	}
 
@@ -355,8 +368,8 @@ public class Robot extends IterativeRobot {
 	  * left joystick: strafe
 	  * right joystick: forward/back/rotate
 	  * y:
-	  * b: push/retract
 	  * a: tilt up/down position
+	  * b: push/retract
 	  * x: grab/release (continuous)
 	  * left/right bumper: camera pan (momentary)
 	  *
