@@ -29,9 +29,7 @@ public class Robot extends IterativeRobot {
 
 //	private Compressor c = new Compressor(0);
 
-
 	private LocalDateTime stopTime;
-
 
 	private double motorSpeed = 0.0;
 
@@ -86,36 +84,18 @@ public class Robot extends IterativeRobot {
 		// moving
 		m_driveBase.driveCartesian(m_joystick.getRawAxis(0), m_controller.getY()*-1, m_controller.getX()*-1);
 
-		// grab
+		boolean aIsPressed = m_controller.getAButtonPressed();
+		boolean bIsPressed = m_controller.getBButtonPressed();
 		boolean xIsPressed = m_controller.getXButtonPressed();
 
-		if(xIsPressed) {
-			// do something
-			//pneumaticsX.set(true);
+		if(aIsPressed) {
 		}
-
-		boolean bIsPressed = m_controller.getBackButtonPressed();
 
 		if(bIsPressed) {
-//			pneumaticsB.set(true);
 		}
 
-		boolean aIsPressed = m_controller.getAButtonPressed();
-
-		if(aIsPressed) {
-//			pneumaticsA.set(true);
+		if(xIsPressed) {
 		}
-
-		// commenting debounce for now
-//		if(xIsPressed) {
-//			if (debounce) {
-//				// do something
-//			}
-//			else {
-//				debounce = true;
-//				Timer.delay(.01);
-//			}
-//		}			
 	}
 
 	@Override
