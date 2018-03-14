@@ -105,9 +105,9 @@ public class Robot extends IterativeRobot {
 		}
 
 		if(yIsPressed) {
+			release();
 			setDown();
 			retract();
-			release();
 		}
 	}
 
@@ -191,6 +191,7 @@ public class Robot extends IterativeRobot {
 	}
 	
 	private void setDown() {
+		release(0.05);
 		dsLifter.set(DoubleSolenoid.Value.kReverse);
 		Timer.delay(4.0);
 	}
@@ -199,10 +200,13 @@ public class Robot extends IterativeRobot {
 		dsGrabber.set(DoubleSolenoid.Value.kForward);
 		Timer.delay(0.5);
 	}
-	
+
 	private void release() {
+		release(0.5);
+	}
+	private void release(double delay) {
 		dsGrabber.set(DoubleSolenoid.Value.kReverse);
-		Timer.delay(0.5);
+		Timer.delay(delay);
 	}
 	
  	private void testMovement()
