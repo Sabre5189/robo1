@@ -175,9 +175,13 @@ public class Robot extends IterativeRobot {
 //		pneumaticsX.set(false);
 	}
 	
-	private void push() {
+	private void push(double delay) {
 		dsPusher.set(DoubleSolenoid.Value.kForward);
-		Timer.delay(1.0);
+		Timer.delay(delay);
+	}
+	
+	private void push() {
+		push(1.0);
 	}
 
 	private void retract(double delay) {
