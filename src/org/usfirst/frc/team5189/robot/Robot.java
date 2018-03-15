@@ -75,12 +75,15 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
+		aTimer = new Timer();
+		bTimer = new Timer();
+		xTimer = new Timer();
+
 		aTimer.start();
-		aTime = aTimer.get();
 		bTimer.start();
-		bTime = bTimer.get();
 		xTimer.start();
-		xTime = xTimer.get();
+		
+		aTime = bTime = xTime = aTimer.get();
 	}
 	
 	private Timer aTimer;
@@ -93,10 +96,13 @@ public class Robot extends IterativeRobot {
 	boolean aIsPressed;
 	boolean bIsPressed;
 	boolean xIsPressed;
+	boolean yIsPressed;
 
 	boolean aToggle;
 	boolean bToggle;
 	boolean xToggle;
+	
+	boolean firstAction;
 
 	@Override
 	public void teleopPeriodic() {
@@ -106,48 +112,126 @@ public class Robot extends IterativeRobot {
 		aIsPressed = m_controller.getAButtonPressed();
 		bIsPressed = m_controller.getBButtonPressed();
 		xIsPressed = m_controller.getXButtonPressed();
-		boolean yIsPressed = m_controller.getYButtonPressed();
+		yIsPressed = m_controller.getYButtonPressed();
 
-//		a: tilt up/down position
-		if(aIsPressed && aTime > bTime && aTime > xTime) {
+		if(yIsPressed) {
+			release(0.0);
+			retract(0.0);
+			liftUp(0.0);
+			
+			return;
+		}
+
+		if (aIsPressed)
+			aTime = aTimer.get();
+		else if (bIsPressed)
+			bTime = bTimer.get();
+		else if (xIsPressed)
+			xTime = xTimer.get();
+		
+		firstAction = aTime == bTime && bTime == xTime && xTime == aTime;
+		
+		if (firstAction && aIsPressed == false && bIsPressed == false && xIsPressed == false)
+			return;
+				
+		if (aIsPressed && aTime > bTime && aTime > xTime) {
 			aTime=aTimer.get();
 			aToggle = aToggle == false;
 			if (aToggle){
+				System.out.println("lift up");
 				retract(0.0);
 				liftUp(0.0);
 			}
-			else
+			else {
+				System.out.println("set down");
 				setDown(0.0);
+			}		
 		}
-
-//		b: push/retract
-		if(bIsPressed) {
-			bTime = bTimer.get();
+	
+		if (bIsPressed && bTime > aTime && bTime > xTime) {
+			bTime=bTimer.get();
 			bToggle = bToggle == false;
 			if (bToggle)
 			{
+				System.out.println("push");
 				release(0.2);
 				push(0.0);
 			}
 			else
+			{
+				System.out.println("retract");
 				retract(0.0);
+			}
+		}
+	
+		if (xIsPressed && xTime > bTime && xTime > aTime) {
+			xTime=xTimer.get();
+			xToggle = xToggle == false;
+			if (xToggle)
+			{
+				System.out.println("grab");
+				grab(0.0);
+			}
+			else {
+				System.out.println("release");
+				release(0.0);
+			}
+		}
+
+
+
+		
+		
+		
+		
+/*		
+		//		a: tilt up/down position
+		if((firstAction) && (aIsPressed )) {
+			aTime=aTimer.get();
+			aToggle = aToggle == false;
+			if (aToggle){
+				System.out.println("lift up");
+				retract(0.0);
+				liftUp(0.0);
+			}
+			else {
+				System.out.println("set down");
+				setDown(0.0);
+			}
+		}
+
+//		b: push/retract
+		if((firstAction) && (bIsPressed)) {
+			bTime = bTimer.get();
+			bToggle = bToggle == false;
+			if (bToggle)
+			{
+				System.out.println("push");
+				release(0.2);
+				push(0.0);
+			}
+			else
+			{
+				System.out.println("retract");
+				retract(0.0);
+			}
 		}
 
 //		x: grab/release (continuous)
-		if(xIsPressed) {
+		if((firstAction) && (xIsPressed)) {
 			xTime = xTimer.get();
 			xToggle = xToggle == false;
 			if (xToggle)
+			{
+				System.out.println("grab");
 				grab(0.0);
-			else
+			}
+			else {
+				System.out.println("release");
 				release(0.0);
+			}
 		}
-
-		if(yIsPressed) {
-			release();
-			setDown();
-			retract();
-		}
+*/
 	}
 
 	@Override
@@ -183,6 +267,9 @@ public class Robot extends IterativeRobot {
 		Timer.delay(4.0);
 		System.out.println("pneumatic delay finished");
 		
+		// assumes starting from the up position
+		setDown(5.0);
+		
 		grab();
 		
 		liftUp();
@@ -192,10 +279,8 @@ public class Robot extends IterativeRobot {
 				
 		setDown();
 
-		
 		release();
-		
-		
+
 		System.out.println("finished testInit");
 		//------------------------------------------
 
