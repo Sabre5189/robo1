@@ -75,33 +75,72 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
-//		c.setClosedLoopControl(true);
-//		c.setClosedLoopControl(false);
+		aTimer.start();
+		aTime = aTimer.get();
+		bTimer.start();
+		bTime = bTimer.get();
+		xTimer.start();
+		xTime = xTimer.get();
 	}
+	
+	private Timer aTimer;
+	private double aTime;
+	private Timer bTimer;
+	private double bTime;
+	private Timer xTimer;
+	private double xTime;
+
+	boolean aIsPressed;
+	boolean bIsPressed;
+	boolean xIsPressed;
+
+	boolean aToggle;
+	boolean bToggle;
+	boolean xToggle;
 
 	@Override
 	public void teleopPeriodic() {
 		// moving
 		m_driveBase.driveCartesian(m_joystick.getRawAxis(0), m_controller.getY()*-1, m_controller.getX()*-1);
 
-		boolean aIsPressed = m_controller.getAButtonPressed();
-		boolean bIsPressed = m_controller.getBButtonPressed();
-		boolean xIsPressed = m_controller.getXButtonPressed();
+		aIsPressed = m_controller.getAButtonPressed();
+		bIsPressed = m_controller.getBButtonPressed();
+		xIsPressed = m_controller.getXButtonPressed();
 		boolean yIsPressed = m_controller.getYButtonPressed();
 
 //		a: tilt up/down position
-		if(aIsPressed) {
-			liftUp();
+		if(aIsPressed && aTime > bTime && aTime > xTime) {
+			aTime=aTimer.get();
+			aToggle = aToggle == false;
+			if (aToggle){
+				retract(0.0);
+				liftUp(0.0);
+			}
+			else
+				setDown(0.0);
 		}
 
 //		b: push/retract
 		if(bIsPressed) {
-			push();
+			bTime = bTimer.get();
+			bToggle = bToggle == false;
+			if (bToggle)
+			{
+				release(0.2);
+				push(0.0);
+			}
+			else
+				retract(0.0);
 		}
 
 //		x: grab/release (continuous)
 		if(xIsPressed) {
-			grab();
+			xTime = xTimer.get();
+			xToggle = xToggle == false;
+			if (xToggle)
+				grab(0.0);
+			else
+				release(0.0);
 		}
 
 		if(yIsPressed) {
