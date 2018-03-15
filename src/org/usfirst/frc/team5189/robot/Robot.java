@@ -179,10 +179,14 @@ public class Robot extends IterativeRobot {
 		dsPusher.set(DoubleSolenoid.Value.kForward);
 		Timer.delay(1.0);
 	}
+
+	private void retract(double delay) {
+		dsPusher.set(DoubleSolenoid.Value.kReverse);
+		Timer.delay(delay);
+	}
 	
 	private void retract() {
-		dsPusher.set(DoubleSolenoid.Value.kReverse);
-		Timer.delay(1.0);
+		retract(1.0);
 	}
 	
 	private void liftUp(double delay) {
@@ -204,9 +208,12 @@ public class Robot extends IterativeRobot {
 		setDown(4.0);
 	}
 	
-	private void grab() {
+	private void grab(double delay) {
 		dsGrabber.set(DoubleSolenoid.Value.kForward);
-		Timer.delay(0.5);
+		Timer.delay(delay);
+	}
+	private void grab() {
+		grab(0.5);
 	}
 
 	private void release() {
