@@ -185,11 +185,15 @@ public class Robot extends IterativeRobot {
 		Timer.delay(1.0);
 	}
 	
-	private void liftUp() {
+	private void liftUp(double delay) {
 		dsLifter.set(DoubleSolenoid.Value.kForward);
-		Timer.delay(8.0);
+		Timer.delay(delay);
 	}
-	
+
+	private void liftUp() {
+		liftUp(8.0);
+	}
+
 	private void setDown() {
 		release(0.05);
 		dsLifter.set(DoubleSolenoid.Value.kReverse);
