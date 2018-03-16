@@ -65,11 +65,11 @@ public class Robot extends IterativeRobot {
 			m_driveBase.driveCartesian(0, 0, 0);
 			return;
 		}
-		
+
 		if (motorSpeed <= 1.0) {
 			motorSpeed = motorSpeed + .025;
 		}
-		
+
 		m_driveBase.driveCartesian(0, motorSpeed, 0);
 	}
 
@@ -82,10 +82,10 @@ public class Robot extends IterativeRobot {
 		aTimer.start();
 		bTimer.start();
 		xTimer.start();
-		
+
 		aTime = bTime = xTime = aTimer.get();
 	}
-	
+
 	private Timer aTimer;
 	private double aTime;
 	private Timer bTimer;
@@ -101,7 +101,7 @@ public class Robot extends IterativeRobot {
 	boolean aToggle;
 	boolean bToggle;
 	boolean xToggle;
-	
+
 	boolean firstAction;
 
 	@Override
@@ -128,12 +128,12 @@ public class Robot extends IterativeRobot {
 			bTime = bTimer.get();
 		else if (xIsPressed)
 			xTime = xTimer.get();
-		
+
 		firstAction = aTime == bTime && bTime == xTime && xTime == aTime;
-		
+
 		if (firstAction && aIsPressed == false && bIsPressed == false && xIsPressed == false)
 			return;
-				
+
 		if (aIsPressed && aTime > bTime && aTime > xTime) {
 			aTime=aTimer.get();
 			aToggle = aToggle == false;
@@ -145,9 +145,9 @@ public class Robot extends IterativeRobot {
 			else {
 				System.out.println("set down");
 				setDown(0.0);
-			}		
+			}
 		}
-	
+
 		if (bIsPressed && bTime > aTime && bTime > xTime) {
 			bTime=bTimer.get();
 			bToggle = bToggle == false;
@@ -163,7 +163,7 @@ public class Robot extends IterativeRobot {
 				retract(0.0);
 			}
 		}
-	
+
 		if (xIsPressed && xTime > bTime && xTime > aTime) {
 			xTime=xTimer.get();
 			xToggle = xToggle == false;
@@ -177,14 +177,7 @@ public class Robot extends IterativeRobot {
 				release(0.0);
 			}
 		}
-
-
-
-		
-		
-		
-		
-/*		
+/*
 		//		a: tilt up/down position
 		if((firstAction) && (aIsPressed )) {
 			aTime=aTimer.get();
@@ -245,46 +238,35 @@ public class Robot extends IterativeRobot {
 	@Override
 	public  void testInit() {
 		System.out.println("starting testInit");
-		
-		
-		
-		
-		
+
 //		RobotDiagnostic diagnostics = new RobotDiagnostic();
 //		
 //		diagnostics.RunDiagnostic();
 
-
-
 		// commenting this while we're testing the pneumatics
 //		testMovement();
-		
-		
-		
 
 		// how much time does the pneumatic pump need to get up to pressure?
 		System.out.println("pneumatic delay start");
 		Timer.delay(4.0);
 		System.out.println("pneumatic delay finished");
-		
+
 		// assumes starting from the up position
 		setDown(5.0);
-		
+
 		grab();
-		
+
 		liftUp();
-		
+
 		push();
 		retract();
-				
+
 		setDown();
 
 		release();
 
 		System.out.println("finished testInit");
 		//------------------------------------------
-
-
 
 //		pneumaticsA.set(true);
 //		Timer.delay(2.0);
@@ -298,12 +280,12 @@ public class Robot extends IterativeRobot {
 //		Timer.delay(2.0);
 //		pneumaticsX.set(false);
 	}
-	
+
 	private void push(double delay) {
 		dsPusher.set(DoubleSolenoid.Value.kForward);
 		Timer.delay(delay);
 	}
-	
+
 	private void push() {
 		push(1.0);
 	}
@@ -312,7 +294,7 @@ public class Robot extends IterativeRobot {
 		dsPusher.set(DoubleSolenoid.Value.kReverse);
 		Timer.delay(delay);
 	}
-	
+
 	private void retract() {
 		retract(1.0);
 	}
@@ -331,15 +313,16 @@ public class Robot extends IterativeRobot {
 		dsLifter.set(DoubleSolenoid.Value.kReverse);
 		Timer.delay(delay);
 	}
-	
+
 	private void setDown() {
 		setDown(4.0);
 	}
-	
+
 	private void grab(double delay) {
 		dsGrabber.set(DoubleSolenoid.Value.kForward);
 		Timer.delay(delay);
 	}
+
 	private void grab() {
 		grab(0.5);
 	}
@@ -347,11 +330,12 @@ public class Robot extends IterativeRobot {
 	private void release() {
 		release(0.5);
 	}
+
 	private void release(double delay) {
 		dsGrabber.set(DoubleSolenoid.Value.kReverse);
 		Timer.delay(delay);
 	}
-	
+
  	private void testMovement()
 	{
 		m_driveBase.driveCartesian(.5, 0, 0);
@@ -359,22 +343,21 @@ public class Robot extends IterativeRobot {
 
 		m_driveBase.driveCartesian(-.5, 0, 0);
 		Timer.delay(2.0);
-		
+
 		m_driveBase.driveCartesian(0, .5, 0);
 		Timer.delay(2.0);
 
 		m_driveBase.driveCartesian(0, -.5, 0);
 		Timer.delay(2.0);
-		
+
 		m_driveBase.driveCartesian(0, 0, .5);
 		Timer.delay(2.0);
 
 		m_driveBase.driveCartesian(0, 0, -.5);
 		Timer.delay(2.0);
 	}
-	
+
 	private void singleSolenoidTest() {
-		
 		Solenoid foo0 = new Solenoid(0);
 		Solenoid foo1 = new Solenoid(1);
 		Solenoid foo2 = new Solenoid(2);
@@ -383,9 +366,7 @@ public class Robot extends IterativeRobot {
 		Solenoid foo5 = new Solenoid(5);
 		Solenoid foo6 = new Solenoid(6);
 		Solenoid foo7 = new Solenoid(7);
-		
-		
-		
+
 		foo0.set(false);
 		foo1.set(false);
 		foo2.set(false);
@@ -394,23 +375,17 @@ public class Robot extends IterativeRobot {
 		foo5.set(false);
 		foo6.set(false);
 		foo7.set(false);
-		
-		
-		
-		
-		
+
 		// closes left, then right grabber
 		System.out.println("channel 0 true");
 		foo0.set(true);
 		Timer.delay(2.0);
 
-		
 		// opens right, then left
 		System.out.println("channel 4 true");
 		foo4.set(true);
 		Timer.delay(2.0);
-		
-		
+
 		// pushes pusher out
 //		System.out.println("channel 1 true");
 //		foo1.set(true);
@@ -420,18 +395,12 @@ public class Robot extends IterativeRobot {
 //		System.out.println("channel 6 true");
 //		foo6.set(true);
 //		Timer.delay(2.0);
-		
+
 		// lifts
 //		System.out.println("channel 2 true");
 //		foo2.set(true);
 //		Timer.delay(4.0);
-		
-		
-		
-		
-		
-		
-		
+
 		// so far nothing I can see
 //		System.out.println("channel 0 false");
 //		foo0.set(false);
@@ -474,7 +443,7 @@ public class Robot extends IterativeRobot {
 //		System.out.println("channel 5 false");
 //		foo5.set(false);
 //		Timer.delay(2.0);
-//		
+//
 //
 		// so far nothing I can see
 //		System.out.println("channel 6 false");
@@ -492,12 +461,7 @@ public class Robot extends IterativeRobot {
 }
 
 
-
-
-
-
-
-	/** 
+	/* *******************************************************************
 	 * To Do:
 	 * 
 	 * Two lift motor; 1 runs in reverse of the other
@@ -507,8 +471,8 @@ public class Robot extends IterativeRobot {
 	 * if you activate 90 it will go all the way down
 	 * grabber is either release or grab
 	 * camera coding figure out
-	 */
-	 
+	 ****************************************************************** */
+
 	 /** 
 	  * XBox Controller Mapping:
 	  * 
