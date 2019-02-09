@@ -1,0 +1,155 @@
+import java.time.LocalDateTime;
+
+import edu.wpi.first.wpilibj.Timer;
+//import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import edu.wpi.first.wpilibj.Spark;
+
+//Lift mechanism Plan 
+//fully extended in ~10-20 seconds
+//make sure acceleration is set accordingly (we don't want anyone's shins to get hurt)  
+//
+//fully retracted ~15-20 secs
+//motor should start at ~.14224 meters per second (mps) then move to ~.15318153846 mps when raising up, simplify if needed
+//when retracting it should go at the start ~.14224 mps then go to ~.11713882352 mps, simplify if needed
+//
+public enmu MotorType{
+    kLiftRight(0);, kLiftLeft(0);
+    @SuppressWarnings("MemberName")
+    public final int value;
+    MotorType(int value){
+        this.value=value;
+    }
+}
+
+public LiftMotors (){
+    m_safetyHelper.setSafetyEnabled(true);
+    setName ("RobotLiftSytem");
+}
+
+@Overide
+	public void setDeadband(double deadband) {
+    m_deadbad = deadband;
+}
+
+@Overide
+	public void setMaxOutput(double maxOutput) {
+    m_maxOutput = maxOutput;
+}
+
+@Overide
+	public void setExpiration(double timeout) {
+    m_safetyHelper.setExpiration(timeout);
+}
+
+@Overide
+	public double get expiration () {
+    return m_safetyHelper.getExpiration();
+}
+
+@Overide
+	public boolean isAlive() {
+    return m_safetyHelper.isAlive();
+}
+
+@Override
+	public abstract void stopMotor();
+
+@Override
+	public boolean isSafetyEnabled() {
+     return m_safetyHelper.isSafetyEnabled();
+ }
+
+@Override
+	public void setSafetyEnabled(boolean enabled) {
+    m_safetyHelper.setSafetyEnabled(enabled);
+}
+
+@Override
+    public abstract String getDescription();
+
+    protected double limit(double value) {
+	    if (value > 1.0) {
+	      return 1.0;
+	    }
+	    if (value < -1.0) {
+	      return -1.0;
+	    }
+	    return value;
+	  }
+
+	  /**
+	   * Returns 0.0 if the given value is within the specified range around zero. The remaining range
+	   * between the deadband and 1.0 is scaled from 0.0 to 1.0.
+	   *
+	0 0  * @param value    value to clip
+	   * @param deadband range around zero
+	   */
+	 protected double applyDeadband(double value, double deadband) {
+	    if (Math.abs(value) > deadband) {
+	      if (value > 0.0) {
+	        return (value - deadband) / (1.0 - deadband);
+	      } else {
+	        return (value + deadband) / (1.0 - deadband);
+	      }
+	    } else {
+	      return 0.0;
+	    }
+	  }
+
+	
+	protected void normalize(double[] wheelSpeeds) {
+	    double maxMagnitude = Math.abs(wheelSpeeds[0]);
+	    for (int i = 1; i < wheelSpeeds.length; i++) {
+	      double temp = Math.abs(wheelSpeeds[i]);
+	      if (maxMagnitude < temp) {
+	        maxMagnitude = temp;
+				}.
+				
+	    }
+	    if (maxMagnitude > 1.0) {
+	      for (int i = 0; i < wheelSpeeds.length; i++) {
+	        wheelSpeeds[i] = wheelSpeeds[i] / maxMagnitude;
+	      }
+	    }
+	  }
+	}
+
+
+
+public class Lift {
+	//
+	2ft up
+	//
+		kLiftRight.rotatefor(2.18);
+		kLiftLeft.rotatefor(2.18);
+		
+}
+//
+4ft up
+kLiftRight.rotatefor(4.9);
+kLiftLeft.rotatefor(4.9);
+
+7ft up
+kLiftRight.rotatefor(7.64);
+kLiftLeft.rotatefor(7.64);
+
+2ft down
+kLiftLeft.rotatefor(-2.18);
+kLiftRight.rotatefor(-2.18);
+
+4ft down
+kLiftLeft.rotatefor(-4.9);
+kLiftRight.rotatefor(-4.9);
+
+7ft down
+kLiftLeft.rotatefor(-7.64);
+kLiftRight.rotatefor(-7.64);
+//
