@@ -24,5 +24,10 @@ public class RobotDiagnostic extends Robot {
 
 		m_driveBase.driveCartesian(0, 0, -.5);
 		Timer.delay(2.0);
+
+		Lift lift=new Lift ();
+		lift.raise(100);
+		Timer.delay(5.0);
+		lift.lower(100);
 	}
 }
